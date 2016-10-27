@@ -1,0 +1,16 @@
+.carousel-arrow{
+    align-self: center; 
+    font-size: 30px
+}
+
+.custom-gradient-left {
+    background-image: -webkit-gradient(linear, left top, right top, from(#691A99), to(white));
+}
+
+.custom-gradient-right {
+    background-image: -webkit-gradient(linear, right top, left top, from(#691A99), to(white));
+}
+
+a[class^="custom-gradient-"], a[class*=" custom-gradient-"]:hover {
+    opacity: 0.7;
+}

@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StreamTilesComponent implements OnInit {
 
+  selected: number = 0;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  selectThumbnail(item: number) {
+    this.selected = item;
+    console.log('item', item, 'selected:', this.selected);
   }
 
 }

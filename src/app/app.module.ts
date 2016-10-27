@@ -1,3 +1,4 @@
+import { TwitchStatusService } from './shared/twitch.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,7 @@ import { ThumbnailScrollComponent } from './thumbnail-scroll/thumbnail-scroll.co
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [TwitchStatusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
