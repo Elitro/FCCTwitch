@@ -3,9 +3,11 @@ export class Settings {
 
     public static channelURL = 'https://api.twitch.tv/kraken/channels/';
 
-    public static streamURL = 'https://api.twitch.tv/kraken/streams/';
+    public static streamAPIURL = 'https://api.twitch.tv/kraken/streams/';
 
     public static freeCodeCampChannel = 'freecodecamp';
+
+    public static streamURL = 'https://www.twitch.tv/';
 
     public static channelsArray = [
         'BeyondTheSummit2',

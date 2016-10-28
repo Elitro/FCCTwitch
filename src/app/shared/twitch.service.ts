@@ -13,12 +13,10 @@ export class TwitchStatusService {
     getChannel(endpoint: string, channelName: string): Observable<any> {
         let url = endpoint + channelName + Settings.clientID;
         return this.http.get(url)
-            .catch((e: Response) => {
+            .map(response => response.json())
+            .catch((e: any) => {
                 console.log('Error getting channel:', e);
                 return Observable.throw(e.json());
-            })
-            .map((response: Response) => {
-                return response.json();
             });
     }
 

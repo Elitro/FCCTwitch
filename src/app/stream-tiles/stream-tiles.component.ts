@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { StreamCardsObject } from './../thumbnail-scroll/Models/stream-cards';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-stream-tiles',
@@ -7,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StreamTilesComponent implements OnInit {
 
+  //@Input() receivedCard: Subject<StreamCardsObject> = new Subject<StreamCardsObject>();
+  @Input() receivedCard: StreamCardsObject = new StreamCardsObject();
+
   selected: number = 0;
 
   constructor() { }
 
   ngOnInit() {
+    console.log('got card:', this.receivedCard);
   }
 
   selectThumbnail(item: number) {

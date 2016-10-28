@@ -6,16 +6,14 @@
   </ol>
   <div class="carousel-inner" role="listbox">
 
-    <div class="carousel-item active row">
-      <div *ngFor="let item of tempArray">
-        <div class="col-xs-{{cardsPerRow}}">
-          <app-stream-tiles></app-stream-tiles>
+    <div class="carousel-item row" *ngFor="let carouselItem of carouselArray; let i = index;" [ngClass]="{'active': i === 0}">
+      <div *ngFor="let item of carouselItem; let j = index;">
+
+        <div class="col-xs-{{columnWidth}}">
+          <app-stream-tiles [receivedCard]="item"></app-stream-tiles>
         </div>
       </div>
-    </div>
 
-    <div class="carousel-item">
-      <app-stream-tiles></app-stream-tiles>
     </div>
 
   </div>
