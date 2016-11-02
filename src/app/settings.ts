@@ -14,7 +14,7 @@ export class Settings {
         'brunofin', //doesn't exist
         'day9tv',
         'admiralbulldog',
-        'sing_sing',
+        'XBOCT',
         'arteezy'
     ]
 }

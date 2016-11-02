@@ -1,7 +1,7 @@
 export class StreamCardsObject {
     Description: string;
     Name: string;
-    Selected: boolean;
+    Id: number;
     PreviewImage: string;
     link: string;
 }

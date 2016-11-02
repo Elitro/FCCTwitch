@@ -1,16 +1,15 @@
 <div id="streams-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
-  <ol class="carousel-indicators">
-    <li data-target="#streams-carousel" data-slide-to="0" class="active"></li>
-    <li data-target="#streams-carousel" data-slide-to="1"></li>
-    <li data-target="#streams-carousel" data-slide-to="2"></li>
+  <ol class="carousel-indicators" style="margin-top: 5px">
+    <li *ngFor="let indicator of fillArray(carouselWidth); let i=index;" data-target="#streams-carousel" [ngClass]="{'active': i === 0}"
+      data-slide-to="i"></li>
   </ol>
   <div class="carousel-inner" role="listbox">
 
     <div class="carousel-item row" *ngFor="let carouselItem of carouselArray; let i = index;" [ngClass]="{'active': i === 0}">
       <div *ngFor="let item of carouselItem; let j = index;">
 
-        <div class="col-xs-{{columnWidth}}">
-          <app-stream-tiles [receivedCard]="item"></app-stream-tiles>
+        <div class="col-xs-{{columnWidth}}" (click)="selectThumbnail(j+(i*cardsPerRow))">
+          <app-stream-tiles [receivedCard]="item" [selected]="cardSelected"></app-stream-tiles>
         </div>
       </div>
 

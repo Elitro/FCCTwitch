@@ -14,3 +14,7 @@
 a[class^="custom-gradient-"], a[class*=" custom-gradient-"]:hover {
     opacity: 0.7;
 }
+
+.carousel-indicators{
+    bottom: 0px !important;
+}

@@ -1,5 +1,6 @@
 import { StreamCardsObject } from './../thumbnail-scroll/Models/stream-cards';
 import { Component, OnInit, Input } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-stream-tiles',
@@ -11,17 +12,27 @@ export class StreamTilesComponent implements OnInit {
   //@Input() receivedCard: Subject<StreamCardsObject> = new Subject<StreamCardsObject>();
   @Input() receivedCard: StreamCardsObject = new StreamCardsObject();
 
-  selected: number = 0;
+  @Input() selected: Subject<number>;
+
+  selectedCard: number;
 
   constructor() { }
 
   ngOnInit() {
-    console.log('got card:', this.receivedCard);
+    // console.log('got card:', this.receivedCard);
+
+    this.selected.subscribe(value => this.selectedCard = value);
   }
 
-  selectThumbnail(item: number) {
-    this.selected = item;
-    console.log('item', item, 'selected:', this.selected);
+  getChannelImage(card: StreamCardsObject): string {
+
+    if (card.Description === 'Stream does not exist') {
+      return 'assets/Delete.png';
+    } else if (card.Description === 'Stream is offline') {
+      return 'assets/disconnected.png';
+    } else {
+      return card.PreviewImage;
+    }
   }
 
 }

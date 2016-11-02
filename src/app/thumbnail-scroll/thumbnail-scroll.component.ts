@@ -2,8 +2,8 @@ import { Settings } from './../settings';
 import { TwitchStatusService } from './../shared/twitch.service';
 import { StreamCardsObject } from './Models/stream-cards';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-thumbnail-scroll',
@@ -11,6 +11,8 @@ import 'rxjs/add/observable/throw';
   styleUrls: ['./thumbnail-scroll.component.css']
 })
 export class ThumbnailScrollComponent implements OnInit {
+
+  cardSelected: Subject<number> = new Subject<number>();
 
   cardArray: Array<StreamCardsObject> = new Array<StreamCardsObject>();
 
@@ -53,16 +55,18 @@ export class ThumbnailScrollComponent implements OnInit {
       carouselArray[k].push(cardArray[i]);
     }
 
-    console.log('carousel:', carouselArray);
+    // console.log('carousel:', carouselArray);
     return carouselArray;
   }
 
   addCardToArray(card: StreamCardsObject, response: any) {
-    card = this.fillCardObject(response);
+
+    card = this.fillCardObject(card, response);
+
+    card.Id = this.cardArray.length;
     this.cardArray.push(card);
-    console.log('name:', name, 'cardArray:', this.cardArray);
+    // console.log('name:', card.Name, 'cardArray:', this.cardArray);
     if (this.cardArray.length === this.tempArray.length) {
-      console.log('cenas');
       this.carouselArray = this.buildCarouselArray(this.cardArray, this.cardsPerRow);
     }
   }
@@ -70,6 +74,7 @@ export class ThumbnailScrollComponent implements OnInit {
   getChannelCard(name: string): void {
 
     let card: StreamCardsObject = new StreamCardsObject();
+    card.Name = name;
 
     this.service.getChannel(Settings.streamAPIURL, name)
       .subscribe(response => {
@@ -83,26 +88,32 @@ export class ThumbnailScrollComponent implements OnInit {
 
   }
 
-  fillCardObject(response: any): StreamCardsObject {
-
-    let card: StreamCardsObject = new StreamCardsObject();
+  fillCardObject(card: StreamCardsObject, response: any): StreamCardsObject {
 
     // console.log('fillCardObject', response);
 
     if (response.error) {
-      card.Name = name;
       card.Description = 'Stream does not exist';
     } else if (!response.stream) {
-      card.Name = name;
       card.Description = 'Stream is offline';
       card.link = Settings.streamURL + name;
     } else {
-      card.Name = name;
       card.Description = response.stream.channel.status;
       card.PreviewImage = response.stream.channel.logo;
       card.link = Settings.streamURL + name;
     }
     return card;
+  }
+
+  fillArray(targetLength: number): Array<any> {
+    if (targetLength) {
+      return Array(targetLength).fill(0);
+    }
+    return [];
+  }
+
+  selectThumbnail(item: number) {
+    this.cardSelected.next(item);
   }
 
 }
