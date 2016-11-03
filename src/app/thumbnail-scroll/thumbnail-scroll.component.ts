@@ -36,11 +36,7 @@ export class ThumbnailScrollComponent implements OnInit {
       this.getChannelCard(this.tempArray[i]);
     }
 
-    // this.carouselArray = this.buildCarouselArray(this.cardArray, this.cardsPerRow);
-
     // let response = this.service.getChannel(Settings.streamAPIURL, 'freecodecamp');
-    // let response = this.service.getChannel(Settings.streamAPIURL, 'BeyondTheSummit2');
-    // response.subscribe(response => console.log(response));
   }
 
   buildCarouselArray(cardArray: any, numberOfRows: number): any[][] {
@@ -59,9 +55,9 @@ export class ThumbnailScrollComponent implements OnInit {
     return carouselArray;
   }
 
-  addCardToArray(card: StreamCardsObject, response: any) {
+  addCardToArray(card: StreamCardsObject, response: any, name: string) {
 
-    card = this.fillCardObject(card, response);
+    card = this.fillCardObject(card, response, name);
 
     card.Id = this.cardArray.length;
     this.cardArray.push(card);
@@ -78,17 +74,17 @@ export class ThumbnailScrollComponent implements OnInit {
 
     this.service.getChannel(Settings.streamAPIURL, name)
       .subscribe(response => {
-        this.addCardToArray(card, response);
+        this.addCardToArray(card, response, name);
 
+        console.log('channel name:', name, 'response:', response);
       }, error => {
-        this.addCardToArray(card, error);
+        this.addCardToArray(card, error, name);
         console.log('error:', error);
       });
-    // console.log('channel name:', name, 'response:', response);
 
   }
 
-  fillCardObject(card: StreamCardsObject, response: any): StreamCardsObject {
+  fillCardObject(card: StreamCardsObject, response: any, name: string): StreamCardsObject {
 
     // console.log('fillCardObject', response);
 
@@ -96,11 +92,13 @@ export class ThumbnailScrollComponent implements OnInit {
       card.Description = 'Stream does not exist';
     } else if (!response.stream) {
       card.Description = 'Stream is offline';
-      card.link = Settings.streamURL + name;
+      card.Link = Settings.streamURL + name;
     } else {
       card.Description = response.stream.channel.status;
       card.PreviewImage = response.stream.channel.logo;
-      card.link = Settings.streamURL + name;
+      card.Viewers = response.stream.viewers;
+      card.Game = response.stream.game;
+      card.Link = Settings.streamURL + name;
     }
     return card;
   }
@@ -112,7 +110,8 @@ export class ThumbnailScrollComponent implements OnInit {
     return [];
   }
 
-  selectThumbnail(item: number) {
+  selectThumbnail(item: number, card: StreamCardsObject) {
+    this.service.updatePreviewCard(card);
     this.cardSelected.next(item);
   }
 

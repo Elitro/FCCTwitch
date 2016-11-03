@@ -3,5 +3,7 @@ export class StreamCardsObject {
     Name: string;
     Id: number;
     PreviewImage: string;
-    link: string;
+    Link: string;
+    Viewers: number;
+    Game: string;
 }

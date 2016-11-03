@@ -8,7 +8,7 @@
     <div class="carousel-item row" *ngFor="let carouselItem of carouselArray; let i = index;" [ngClass]="{'active': i === 0}">
       <div *ngFor="let item of carouselItem; let j = index;">
 
-        <div class="col-xs-{{columnWidth}}" (click)="selectThumbnail(j+(i*cardsPerRow))">
+        <div class="col-xs-{{columnWidth}}" (click)="selectThumbnail(j+(i*cardsPerRow), item)">
           <app-stream-tiles [receivedCard]="item" [selected]="cardSelected"></app-stream-tiles>
         </div>
       </div>

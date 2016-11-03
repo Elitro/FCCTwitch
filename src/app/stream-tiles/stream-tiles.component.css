@@ -8,3 +8,37 @@
     width: 300px;
     height: 300px;
 }
+
+/* Custom, iPhone Retina */ 
+    @media only screen and (min-width : 320px) {
+        .my-img{
+            width: 50px;
+            height: 50px;
+        }
+        
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (min-width : 480px) {
+        .my-img{
+            width: 70px;
+            height: 70px;
+        }
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+        .my-img{
+            width: 100px;
+            height: 100px;
+        }
+        
+    }
+
+    @media only screen and (min-width : 992px) {
+        .my-img{
+            width: 300px;
+            height: 300px;
+        }
+    }

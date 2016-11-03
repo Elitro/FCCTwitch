@@ -9,7 +9,6 @@ import { Subject } from 'rxjs/Subject';
 })
 export class StreamTilesComponent implements OnInit {
 
-  //@Input() receivedCard: Subject<StreamCardsObject> = new Subject<StreamCardsObject>();
   @Input() receivedCard: StreamCardsObject = new StreamCardsObject();
 
   @Input() selected: Subject<number>;
@@ -19,8 +18,6 @@ export class StreamTilesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // console.log('got card:', this.receivedCard);
-
     this.selected.subscribe(value => this.selectedCard = value);
   }
 

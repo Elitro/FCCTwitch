@@ -13,8 +13,8 @@ export class Settings {
         'BeyondTheSummit2',
         'brunofin', //doesn't exist
         'day9tv',
-        'admiralbulldog',
-        'XBOCT',
-        'arteezy'
+        'freecodecamp',
+        'Sing_sing',
+        'moonduckTV'
     ]
 }
